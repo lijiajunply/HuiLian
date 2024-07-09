@@ -1,0 +1,6 @@
+@HuiLianMedical.WebApi_HostAddress = http://localhost:5048
+
+GET {{HuiLianMedical.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
