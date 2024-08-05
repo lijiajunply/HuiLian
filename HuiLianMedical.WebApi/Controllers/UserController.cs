@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HuiLianMedical.WebApi.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpContextAccessor httpContextAccessor)
     : ControllerBase
@@ -17,8 +17,9 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
     {
         var member = httpContextAccessor.HttpContext?.User.GetUser();
         if (member == null) return NotFound();
-        
-        member = await context.Users.FirstOrDefaultAsync(x => x.Id == member.Id);
+
+        member = await context.Users.Include(x => x.Commodities)
+            .FirstOrDefaultAsync(x => x.Id == member.Id);
         if (member == null) return NotFound();
         return member;
     }
@@ -66,7 +67,40 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
 
         return jwtHelper.GetMemberToken(model);
     }
-    
+
+    [TokenActionFilter]
+    [Authorize]
+    [HttpPost]
+    public async Task<ActionResult> UploadAvatar(IFormFile file)
+    {
+        var member = httpContextAccessor.HttpContext?.User.GetUser();
+        if (member == null) return NotFound();
+
+        member = await context.Users.FirstOrDefaultAsync(x => x.Id == member.Id);
+        if (member == null) return NotFound();
+        if (!Directory.Exists($"/UserAva/{member.Id}"))
+            Directory.CreateDirectory($"/UserAva/{member.Id}");
+
+        if (!string.IsNullOrEmpty(member.Avatar))
+        {
+            System.IO.File.Delete(member.Avatar);
+        }
+
+        var s = System.IO.File.Open($"/UserAva/{member.Id}/{file.FileName}", FileMode.OpenOrCreate);
+        try
+        {
+            await file.CopyToAsync(s);
+        }
+        catch (Exception e)
+        {
+            return Problem(e.Message);
+        }
+
+        member.Avatar = $"/UserAva/{member.Id}/{file.FileName}";
+        await context.SaveChangesAsync();
+        return Ok();
+    }
+
     private async Task<bool> MemberModelExists(string id)
     {
         return await context.Users.AnyAsync(e => e.Id == id);

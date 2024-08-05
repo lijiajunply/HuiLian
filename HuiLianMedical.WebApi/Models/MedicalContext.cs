@@ -22,10 +22,18 @@ public sealed class MedicalContext : DbContext
         finally
         {
             Users = Set<UserModel>();
+            Commodities = Set<CommodityModel>();
+            TodoAid = Set<AidModel>();
+            Categories = Set<CategoryModel>();
+            DoneAid = Set<AidModel>();
         }
     }
 
     public DbSet<UserModel> Users { get; init; }
+    public DbSet<CategoryModel> Categories { get; init; }
+    public DbSet<CommodityModel> Commodities { get; init; }
+    public DbSet<AidModel> TodoAid { get; init; }
+    public DbSet<AidModel> DoneAid { get; init; }
 }
 
 public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MedicalContext>

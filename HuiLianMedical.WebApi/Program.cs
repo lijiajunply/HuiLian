@@ -95,6 +95,9 @@ using (var scope = app.Services.CreateScope())
 
     context.SaveChanges();
     context.Dispose();
+    Directory.CreateDirectory($"{app.Environment.ContentRootPath}/UserAva");
+    Directory.CreateDirectory($"{app.Environment.ContentRootPath}/Aid");
+    Directory.CreateDirectory($"{app.Environment.ContentRootPath}/Commodity");
 }
 
 app.UseHttpsRedirection();
