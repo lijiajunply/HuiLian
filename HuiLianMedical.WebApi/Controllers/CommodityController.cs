@@ -1,4 +1,6 @@
-﻿using HuiLianMedical.WebApi.Models;
+﻿using HuiLianMedical.Share;
+using HuiLianMedical.Share.Data;
+using HuiLianMedical.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,8 @@
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using HuiLianMedical.Share;
+using HuiLianMedical.Share.Data;
 using HuiLianMedical.WebApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;

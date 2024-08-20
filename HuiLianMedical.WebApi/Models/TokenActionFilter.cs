@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using HuiLianMedical.Share.Data;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace HuiLianMedical.WebApi.Models;

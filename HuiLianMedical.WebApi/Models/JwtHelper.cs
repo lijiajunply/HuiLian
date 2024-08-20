@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using HuiLianMedical.Share.Data;
 using Microsoft.IdentityModel.Tokens;
 
 namespace HuiLianMedical.WebApi.Models;
