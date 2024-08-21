@@ -2,7 +2,7 @@
 	<view class="container" style="height: 100vh;display: block;">
 	  <view class="username">
 	    <view class="username-content">
-	      <image src="/assets/OAjiangLogo.png" style="height: 20vw;width: 20vw;margin-top: 5%;margin-right: 10rpx;" />
+	      <image src="/static/logo.png" style="height: 20vw;width: 20vw;margin-top: 5%;margin-right: 10rpx;" />
 	      <div>
 	        <text class="username-text">
 	          {{username}}

@@ -3,9 +3,7 @@
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/tabbar/Map/Map",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
+			"style": {}
 		},
 		{
 			"path": "pages/tabbar/Store/Store",

@@ -1,6 +1,6 @@
 <template>
 	<view class="signup-container">
-		<form bindsubmit="login">
+		<form @submit="login">
 			<view class="login-box">
 				<view class="title">
 					登录
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import apiUri from '../../api.js'
+import {apiurl} from '../../api.js'
 export default {
 	data() {
 		return {
@@ -45,7 +45,7 @@ export default {
 
 			uni.request({
 				method: "POST",
-				url: apiUri + 'User/Login',
+				url: apiurl + 'User/Login',
 				data: userData,
 				success: (data) => {
 					if (data.statusCode == 404) {
@@ -62,7 +62,7 @@ export default {
 						header: {
 							authorization: "Bearer " + Vue.prototype.$jwt
 						},
-						url: apiUri + 'User/GetData',
+						url: apiurl + 'User/GetData',
 						success: (userData) => {
 							if (userData.statusCode !== 200) {
 								uni.showToast({
