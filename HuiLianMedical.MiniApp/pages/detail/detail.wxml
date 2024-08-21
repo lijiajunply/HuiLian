@@ -1,0 +1,5 @@
+<view class="container">
+  <image class="article-image" src="{{article.image}}" />
+  <text class="article-title">{{article.title}}</text>
+  <text class="article-content">{{article.content}}</text>
+</view>

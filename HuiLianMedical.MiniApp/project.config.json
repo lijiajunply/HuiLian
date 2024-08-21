@@ -1,0 +1,38 @@
+{
+    "description": "项目配置文件。",
+    "setting": {
+        "urlCheck": true,
+        "es6": true,
+        "postcss": true,
+        "minified": true,
+        "newFeature": true,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        }
+    },
+    "compileType": "miniprogram",
+    "libVersion": "2.25.3",
+    "appid": "wx22130e82ec7a4111",
+    "projectname": "%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE",
+    "condition": {
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "weather",
+                    "pathName": "pages/weather/weather",
+                    "query": ""
+                }
+            ]
+        }
+    },
+    "packOptions": {
+        "ignore": [],
+        "include": []
+    },
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
+    }
+}

@@ -1,0 +1,10 @@
+<view class="container">
+  <block wx:for="{{articles}}" wx:key="index">
+    <navigator open-type ="navigate" url="/pages/detail/detail?index={{index}}" hover-class="none">
+      <view class="article-preview">
+        <image class="article-image" src="{{item.image}}" />
+        <text class="article-title">{{item.title}}</text>
+      </view>
+    </navigator>
+  </block>
+</view>

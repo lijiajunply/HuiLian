@@ -1,0 +1,25 @@
+.container {
+    padding: 20rpx;
+  }
+  
+  .article-preview {
+    margin-bottom: 20rpx;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20rpx;
+    text-align: center;
+  }
+  
+  .article-image {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* 设置宽高比为16:9 */
+    object-fit: cover;
+    border-radius: 10rpx;
+  }
+  
+  .article-title {
+    font-size: 32rpx;
+    margin-top: 10rpx;
+    font-weight: bold;
+    text-align: center;
+  }
+  
