@@ -2,10 +2,10 @@
 export default {
 	onLaunch: function () {
 		let user = uni.getStorageSync("UserData")
+		let jet = uni.getStorageSync('Jwt')
 		
-		if(user !== null){
-			Vue.prototype.$userData = user
-		}
+		Vue.prototype.$userData = user
+		Vue.prototype.$jwt = jwt
 	}
 };
 </script>

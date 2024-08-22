@@ -1,35 +1,32 @@
 <template>
-	<view class="signup-container">
-		<form @submit="login">
-			<view class="login-box">
-				<view class="title">
-					登录
-				</view>
-				<view class="input-box">
-					<input class="input" :value="userPhone" number placeholder="手机号码" />
-				</view>
-				<view class="input-box">
-					<input class="input" :value="userPhone" password placeholder="密码" />
-				</view>
-				<button class="input-buttom" type="primary" form-type="submit">登录</button>
-			</view>
-		</form>
-	</view>
+	<el-form :model="form" label-width="auto" style="max-width: 600px">
+		<el-form-item label="手机号">
+			<el-input v-model="form.userPhone" placeholder="请输入手机号" />
+		</el-form-item>
+		<el-form-item label="密码">
+			<el-input v-model="form.userPhone" type="password" placeholder="请输入密码" show-password />
+		</el-form-item>
+		<el-form-item>
+			<el-button type="primary" @click="login">登录</el-button>
+		</el-form-item>
+	</el-form>
 </template>
 
 <script>
-import {apiurl} from '../../api.js'
+import { apiurl } from '../../api.js'
 export default {
 	data() {
 		return {
-			userPhone: "",
-			userPassword: ""
+			form: {
+				userPhone: "",
+				userPassword: ""
+			}
 		}
 	},
 	methods: {
 		login: function () {
 
-			if (this.userPhone == '' || this.userPassword == '') // 暂时这样，需要指定账号密码规则。
+			if (this.form.userPhone == '' || this.form.userPassword == '') // 暂时这样，需要指定账号密码规则。
 			{
 				uni.showToast({
 					title: '用户名或密码不能为空',
@@ -39,8 +36,8 @@ export default {
 			}
 
 			const userData = {
-				phone: this.userPhone,
-				password: this.userPassword
+				phone: this.form.userPhone,
+				password: this.form.userPassword
 			}
 
 			uni.request({
@@ -88,43 +85,3 @@ export default {
 	}
 }
 </script>
-
-<style>
-/* pages/signin/signin.wxss */
-
-.signup-container {
-	/* background-image: linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%); */
-	align-items: center;
-	padding: 200rpx 0;
-	height: 80vh;
-	margin-top: 10vh;
-}
-
-.title {
-	font-size: 24px;
-	font-weight: bold;
-	color: #333333;
-	margin-bottom: 10px;
-	text-align: center;
-}
-
-.login-box {
-	width: 80%;
-	margin: 0 auto;
-}
-
-.input {
-	/* margin-top: 30rpx;
-  margin-bottom: 30rpx; */
-	border-bottom: 1px solid gray;
-}
-
-.input-box {
-	padding: 30rpx;
-}
-
-.input-buttom {
-	margin-top: 30rpx;
-	margin-bottom: 30rpx;
-}
-</style>
