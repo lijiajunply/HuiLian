@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuiLianMedical.WebApi", "HuiLianMedical.WebApi\HuiLianMedical.WebApi.csproj", "{8BEAC185-BD20-42FB-950E-02FBFF7B20AE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuiLianMedical.Share", "HuiLianMedical.Share\HuiLianMedical.Share.csproj", "{22CB6A08-4E0B-4F5E-A506-ECE3D099A335}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuilianMedical.Backend", "HuilianMedical.Backend\HuilianMedical.Backend\HuilianMedical.Backend.csproj", "{CCCCC7CF-F10F-49B0-9767-9CFC7D1CED2A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuilianMedical.Backend.Client", "HuilianMedical.Backend\HuilianMedical.Backend.Client\HuilianMedical.Backend.Client.csproj", "{D00ECA81-E11C-4246-8EB7-820A9212C579}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +16,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8BEAC185-BD20-42FB-950E-02FBFF7B20AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BEAC185-BD20-42FB-950E-02FBFF7B20AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BEAC185-BD20-42FB-950E-02FBFF7B20AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BEAC185-BD20-42FB-950E-02FBFF7B20AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{22CB6A08-4E0B-4F5E-A506-ECE3D099A335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{22CB6A08-4E0B-4F5E-A506-ECE3D099A335}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22CB6A08-4E0B-4F5E-A506-ECE3D099A335}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,9 +24,5 @@ Global
 		{CCCCC7CF-F10F-49B0-9767-9CFC7D1CED2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCCCC7CF-F10F-49B0-9767-9CFC7D1CED2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCCCC7CF-F10F-49B0-9767-9CFC7D1CED2A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D00ECA81-E11C-4246-8EB7-820A9212C579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D00ECA81-E11C-4246-8EB7-820A9212C579}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D00ECA81-E11C-4246-8EB7-820A9212C579}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D00ECA81-E11C-4246-8EB7-820A9212C579}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

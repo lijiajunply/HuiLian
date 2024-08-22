@@ -4,7 +4,7 @@ using System.Text;
 using HuiLianMedical.Share.Data;
 using Microsoft.IdentityModel.Tokens;
 
-namespace HuiLianMedical.WebApi.Models;
+namespace HuilianMedical.Backend.Models;
 
 public class JwtHelper(IConfiguration configuration)
 {

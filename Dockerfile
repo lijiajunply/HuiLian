@@ -7,17 +7,18 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["HuiLianMedical.WebApi/HuiLianMedical.WebApi.csproj", "HuiLianMedical.WebApi/"]
-RUN dotnet restore "HuiLianMedical.WebApi/HuiLianMedical.WebApi.csproj"
+COPY ["HuilianMedical.Backend/HuilianMedical.Backend/HuilianMedical.Backend.csproj", "HuilianMedical.Backend/HuilianMedical.Backend/"]
+COPY ["HuiLianMedical.Share/HuiLianMedical.Share.csproj", "HuiLianMedical.Share/"]
+RUN dotnet restore "HuilianMedical.Backend/HuilianMedical.Backend/HuilianMedical.Backend.csproj"
 COPY . .
-WORKDIR "/src/HuiLianMedical.WebApi"
-RUN dotnet build "HuiLianMedical.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/HuilianMedical.Backend/HuilianMedical.Backend"
+RUN dotnet build "HuilianMedical.Backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "HuiLianMedical.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "HuilianMedical.Backend.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "HuiLianMedical.WebApi.dll"]
+ENTRYPOINT ["dotnet", "HuilianMedical.Backend.dll"]

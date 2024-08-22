@@ -1,17 +1,23 @@
-﻿using HuiLianMedical.Share;
+﻿using HuilianMedical.Backend.Models;
+using HuiLianMedical.Share;
 using HuiLianMedical.Share.Data;
-using HuiLianMedical.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace HuiLianMedical.WebApi.Controllers;
+namespace HuilianMedical.Backend.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class CommodityController(MedicalContext context, IHttpContextAccessor httpContextAccessor)
     : ControllerBase
 {
+    
+    /// <summary>
+    /// 从标签获取所有商品
+    /// </summary>
+    /// <param name="category">标签名</param>
+    /// <returns></returns>
     [HttpGet("{category}")]
     public async Task<ActionResult<List<CommodityModel>>> GetCommodityFromCategory(string category)
     {
@@ -22,6 +28,11 @@ public class CommodityController(MedicalContext context, IHttpContextAccessor ht
         return c.Commodities;
     }
 
+    /// <summary>
+    /// 购买物品
+    /// </summary>
+    /// <param name="key">商品的ID</param>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize]
     [HttpGet("{key}")]
@@ -43,12 +54,22 @@ public class CommodityController(MedicalContext context, IHttpContextAccessor ht
         return Ok(member.Points);
     }
 
+    /// <summary>
+    /// 获取所有商品
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<List<CategoryModel>>> GetAllCategory()
     {
         return await context.Categories.Include(categoryModel => categoryModel.Commodities).ToListAsync();
     }
 
+    
+    /// <summary>
+    /// 添加标签
+    /// </summary>
+    /// <param name="categoryModel">标签类</param>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize(Roles = "管理员")]
     [HttpPost]
@@ -77,6 +98,12 @@ public class CommodityController(MedicalContext context, IHttpContextAccessor ht
         return Ok();
     }
 
+    
+    /// <summary>
+    /// 添加商品
+    /// </summary>
+    /// <param name="commodityModel">商品类，记得添加标签的Key</param>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize(Roles = "管理员")]
     [HttpPost]
@@ -108,6 +135,12 @@ public class CommodityController(MedicalContext context, IHttpContextAccessor ht
         return Ok();
     }
 
+    
+    /// <summary>
+    /// 给商品打标签
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize(Roles = "管理员")]
     [HttpPost]
@@ -124,7 +157,13 @@ public class CommodityController(MedicalContext context, IHttpContextAccessor ht
         await context.SaveChangesAsync();
         return Ok();
     }
-
+    
+    
+    /// <summary>
+    /// 删除商品标签
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize(Roles = "管理员")]
     [HttpPost]
@@ -141,6 +180,12 @@ public class CommodityController(MedicalContext context, IHttpContextAccessor ht
         return Ok();
     }
 
+    
+    /// <summary>
+    /// 删除商品
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize(Roles = "管理员")]
     [HttpGet("{key}")]
@@ -154,6 +199,11 @@ public class CommodityController(MedicalContext context, IHttpContextAccessor ht
         return Ok();
     }
 
+    /// <summary>
+    /// 删除标签
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize(Roles = "管理员")]
     [HttpGet("{key}")]
@@ -166,6 +216,13 @@ public class CommodityController(MedicalContext context, IHttpContextAccessor ht
         return Ok();
     }
 
+    
+    /// <summary>
+    /// 给商品添加图片
+    /// </summary>
+    /// <param name="file">图片文件</param>
+    /// <param name="key">商品Key</param>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize]
     [HttpPut("{key}")]

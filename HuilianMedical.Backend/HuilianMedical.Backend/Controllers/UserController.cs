@@ -1,17 +1,22 @@
+using HuilianMedical.Backend.Models;
 using HuiLianMedical.Share;
 using HuiLianMedical.Share.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HuiLianMedical.WebApi.Models;
-using Microsoft.AspNetCore.Authorization;
 
-namespace HuiLianMedical.WebApi.Controllers;
+namespace HuilianMedical.Backend.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpContextAccessor httpContextAccessor)
     : ControllerBase
 {
+    
+    /// <summary>
+    /// 获取数据
+    /// </summary>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize]
     [HttpGet]
@@ -26,6 +31,12 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
         return member;
     }
 
+    
+    /// <summary>
+    /// 注册
+    /// </summary>
+    /// <param name="model">用户数据</param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult<string>> SignUp(UserModel model)
     {
@@ -44,7 +55,7 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
         }
         catch (DbUpdateException)
         {
-            if (await MemberModelExists(model.Id))
+            if (await context.Users.AnyAsync(e => e.Id == model.Id))
                 return Conflict();
 
             throw;
@@ -54,7 +65,11 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
         return jwtHelper.GetMemberToken(model);
     }
 
-
+    /// <summary>
+    /// 登录
+    /// </summary>
+    /// <param name="loginModel">登录信息</param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult<string>> Login(LoginModel loginModel)
     {
@@ -70,6 +85,12 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
         return jwtHelper.GetMemberToken(model);
     }
 
+    
+    /// <summary>
+    /// 更新头像
+    /// </summary>
+    /// <param name="file">图片文件</param>
+    /// <returns></returns>
     [TokenActionFilter]
     [Authorize]
     [HttpPost]
@@ -101,10 +122,5 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
         member.Avatar = $"/UserAva/{member.Id}/{file.FileName}";
         await context.SaveChangesAsync();
         return Ok();
-    }
-
-    private async Task<bool> MemberModelExists(string id)
-    {
-        return await context.Users.AnyAsync(e => e.Id == id);
     }
 }
