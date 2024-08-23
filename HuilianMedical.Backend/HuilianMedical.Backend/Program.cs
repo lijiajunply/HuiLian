@@ -101,9 +101,6 @@ using (var scope = app.Services.CreateScope())
 
     context.SaveChanges();
     context.Dispose();
-    Directory.CreateDirectory("/UserAva");
-    Directory.CreateDirectory("/Aid");
-    Directory.CreateDirectory("/Commodity");
 }
 
 app.UseHttpsRedirection();

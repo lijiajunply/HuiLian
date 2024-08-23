@@ -28,4 +28,10 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\Aid\" />
+      <Folder Include="wwwroot\Commodity\" />
+      <Folder Include="wwwroot\UserAva\" />
+    </ItemGroup>
+
 </Project>
