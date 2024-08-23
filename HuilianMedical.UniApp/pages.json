@@ -4,29 +4,43 @@
 		{
 			"path": "pages/tabbar/Map/Map",
 			"style": {
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "主页"
 			}
 		},
 		{
 			"path": "pages/tabbar/Store/Store",
 			"style": {
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "积分商店"
 			}
 		},
 		{
 			"path": "pages/tabbar/User/User",
 			"style": {
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "用户界面"
 			}
 		},
 		{
 			"path": "pages/Login/Login",
 			"style": {
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "登录"
 			}
 		},
 		{
 			"path" : "pages/UserUpdate/UserUpdate",
+			"style" : 
+			{
+				"navigationBarTitleText" : "用户数据"
+			}
+		},
+		{
+			"path" : "pages/Aid/Aid",
+			"style" : 
+			{
+				"navigationBarTitleText" : "急救员"
+			}
+		},
+		{
+			"path" : "pages/tabbar/Search/Search",
 			"style" : 
 			{
 				"navigationBarTitleText" : ""

@@ -1,13 +1,13 @@
 <template>
 	<view class="section">
-		<input @touchstart="bindInput" placeholder="查找最近AED" :value="keywords" />
+		<input @confirm="onSearch" inputmode="search" placeholder="请搜索相关内容" v-model="keywords" confirm-type='search'/>
 	</view>
-	<view class="map_container">
+	<view class="map_container" v-loading="loading">
 		<map class="map" :longitude="longitude" :latitude="latitude" scale='11' 
 			 show-location="true" :markers="markers"
 			 :markertap="makertap" />
 	</view>
-	<view class="map_text" wx:if="{{textData.name}}">
+	<view class="map_text" v:if="{{textData.name}}" v-loading="loading">
 		<view class="map-1" @click="getRoute">
 			<image src="/images/jt.png"></image>
 			<view>路线</view>
@@ -29,7 +29,8 @@ export default {
 			latitude: 0,
 			longitude: 0,
 			city: '',
-			markerId : 0
+			markerId : 0,
+			loading : true,
 		};
 	},
 	async onLoad() {
@@ -49,6 +50,7 @@ export default {
 						});
 						this.markers = data.markers
 					})
+				this.loading = false
 			})
 			.catch(e => {
 				console.log(e);
@@ -97,9 +99,18 @@ export default {
 			let mpCtx = uni.createMapContext("map");
 			mpCtx.moveToLocation();
 		},
-		mapchange() {
-			// console.log("改变视野");
-		}
+		onSearch() {
+		      // 检查输入是否为空
+			  console.log(this.keywords)
+		      if (this.keywords !== '') {
+		        // 跳转到其他页面，传递搜索查询参数
+		        uni.navigateTo({
+		          url: '/pages/tabbar/Search/Search' + `?text=${this.keywords}`,
+		        });
+		        // 清空输入框
+		        this.keywords = '';
+		      }
+		    },
 	}
 };
 </script>

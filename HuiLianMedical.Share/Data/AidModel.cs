@@ -10,6 +10,7 @@ public class AidModel : DataModel
     [Column(TypeName = "varchar(32)")]
     public string Key { get; set; } = "";
 
-    [Column(TypeName = "varchar(32)")] public string Name { get; set; } = "";
+    [Column(TypeName = "varchar(18)")] public string IdCard { get; set; } = "";
+    [Column(TypeName = "varchar(32)")] public string Num { get; set; } = "";
     [Column(TypeName = "varchar(32)")] public string Image { get; set; } = "";
 }

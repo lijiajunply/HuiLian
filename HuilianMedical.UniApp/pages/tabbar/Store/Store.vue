@@ -1,7 +1,7 @@
 <template>
 	<el-tabs :tab-position="left">
 		<el-tab-pane v-for="item in category" label="{{item.name}}">
-			<el-space wrap>
+			<el-space wrap v-infinite-scroll="load" style="overflow: auto">
 				<el-card style="max-width: 50%" v-for="c in item.commodities">
 					<img :src="c.image"
 						style="max-height: 80%;max-width: 100%;" />
@@ -12,7 +12,7 @@
 			</el-space>
 		</el-tab-pane>
 	</el-tabs>
-	<view v-if="category == []" style="text-align: center;margin-top: 20px;">
+	<view v-if="category == []" style="text-align: center;margin-top: 30vh;">
 		<img src="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg" style="width: 80%;"/>
 		<p>当前没有商品</p>
 	</view>

@@ -83,7 +83,7 @@ using (var scope = app.Services.CreateScope())
         var user = Environment.GetEnvironmentVariable("USER", EnvironmentVariableTarget.Process);
         var model = new UserModel()
         {
-            Identity = "Founder", UserName = "root", Password = "123456",
+            Identity = "管理员", UserName = "root", Password = "123456",
             Phone = "12345678901234", Email = "iosclub-of-xauat@iosclub.com"
         };
         var users = user?.Split(',');

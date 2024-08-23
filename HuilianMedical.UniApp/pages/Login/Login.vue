@@ -1,15 +1,28 @@
 <template>
-	<el-form :model="form" label-width="auto" style="max-width: 600px">
-		<el-form-item label="手机号">
-			<el-input v-model="form.userPhone" placeholder="请输入手机号" />
-		</el-form-item>
-		<el-form-item label="密码">
-			<el-input v-model="form.userPhone" type="password" placeholder="请输入密码" show-password />
-		</el-form-item>
-		<el-form-item>
-			<el-button type="primary" @click="login">登录</el-button>
-		</el-form-item>
-	</el-form>
+	<view  style="height: 100vh;width: 100vw;">
+		<el-row align="middle" justify="center" style="width: 100%;margin-top: 50px;">
+			<image src="../../static/logo.png" style="height: 100px;width: 100px;"></image>
+		</el-row>
+		<el-row align="middle" justify="center" style="margin-top: 50px;">
+			<el-form class="login-form">
+				<label>电话号码</label>
+				<el-form-item>
+					<div class="input-box">
+						<input type="text" placeholder="请输入电话号码" :value="userPhone" required="" />
+					</div>
+				</el-form-item>
+				<label>密码</label>
+				<el-form-item>
+					<div class="input-box">
+						<input type="password" placeholder="请输入密码" :value="password" required="" />
+					</div>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="login">登录</el-button>
+				</el-form-item>
+			</el-form>
+		</el-row>
+	</view>
 </template>
 
 <script>
@@ -17,16 +30,14 @@ import { apiurl } from '../../api.js'
 export default {
 	data() {
 		return {
-			form: {
-				userPhone: "",
-				userPassword: ""
-			}
+			userPhone: "",
+			userPassword: ""
 		}
 	},
 	methods: {
-		login: function () {
+		login() {
 
-			if (this.form.userPhone == '' || this.form.userPassword == '') // 暂时这样，需要指定账号密码规则。
+			if (this.userPhone == '' || this.userPassword == '') // 暂时这样，需要指定账号密码规则。
 			{
 				uni.showToast({
 					title: '用户名或密码不能为空',
@@ -36,8 +47,8 @@ export default {
 			}
 
 			const userData = {
-				phone: this.form.userPhone,
-				password: this.form.userPassword
+				phone: this.userPhone,
+				password: this.userPassword
 			}
 
 			uni.request({
@@ -46,7 +57,7 @@ export default {
 				data: userData,
 				success: (data) => {
 					if (data.statusCode == 404) {
-						wx.showToast({
+						uni.showToast({
 							title: '信息有误',
 							icon: 'none'
 						});
@@ -85,3 +96,44 @@ export default {
 	}
 }
 </script>
+
+<style>
+.login-form {
+	-webkit-backdrop-filter: blur(20px);
+	backdrop-filter: blur(20px);
+	box-shadow: none;
+	max-width: 100vw
+}
+
+.input-box input {
+	color: #1c1f23;
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	letter-spacing: 1px;
+	margin-bottom: 30px;
+	border: none;
+	border-bottom: 1px solid #ededed;
+	outline: none;
+	background: transparent;
+}
+
+.input-box label {
+	color: #1c1f23;
+	padding: 10px;
+	font-size: 16px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+	top: -18px;
+	left: 0;
+	color: #3c3c43;
+	font-size: 12px;
+}
+</style>

@@ -1,21 +1,58 @@
 <template>
-	<el-container class="container" style="height: 100vh;">
-		<el-header>
-			<el-row>
-				<el-col :span="9">
-					<image src="/static/logo.png"
-						style="height: 20vw;width: 20vw;margin-top: 5%;margin-right: 10rpx;" />
-				</el-col>
-				<el-col :span="15">
-					<h1>{{ userData.userName }}</h1>
-				</el-col>
-			</el-row>
-		</el-header>
-		<el-main>
+	<el-container style="height: 100vh;">
+		<el-main style="margin-top: 10px;">
+			<el-card style="border-radius: 10px;">
+				<el-row @click="loginOrInfo">
+					<el-col :span="9">
+						<image src="/static/logo.png"
+							style="height: 20vw;width: 20vw;" />
+					</el-col>
+					<el-col :span="15" style="height: 20vw;">
+						<el-row align="middle" justify="start" style="height: 100%;margin-left: 10px;">
+							<h3>{{ userData.userName }}</h3>
+							<p>{{userData.identity}}</p>
+						</el-row>
+					</el-col>
+				</el-row>
+				<el-space size="10" spacer="|">
+					<div style="display: flex;">
+						<p>{{userData.points}}</p>
+						<p style="margin-left: 5px;">点数</p>
+					</div>
+					<div style="display: flex;">
+						<p>{{userData.commodities.length}}</p>
+						<p style="margin-left: 5px;">已购买商品</p>
+					</div>
+				</el-space>
+			</el-card>
 			
+			<view v-if="userData.id == ''" style="width: 100%;margin-top: 60px;">
+				<el-card class="card">
+					<el-row v-if="userData.identity === '急救员' || userData.identity === '管理员' " align="middle" justify="start">
+						<el-col :span="16">
+							<p>您当前已成为急救员</p>
+						</el-col>
+						<el-col :span="8" @click="aid">
+							<el-button type="success">
+								查看急救员信息
+							</el-button>
+						</el-col>
+					</el-row>
+					<el-row v-else align="middle" justify="start">
+						<el-col :span="16">
+							<p>您当前还未成为急救员</p>
+						</el-col>
+						<el-col :span="8">
+							<el-button type="primary">
+								认证急救员
+							</el-button>
+						</el-col>
+					</el-row>
+				</el-card>
+			</view>
 		</el-main>
 		<el-footer>
-			<el-button type="danger" style="width: 100vw;" plain>Danger</el-button>	
+			<el-button v-if="userData.id !== ''" type="danger" style="width: 100%;height: 30px;" plain>退出登录</el-button>
 		</el-footer>
 	</el-container>
 </template>
@@ -26,7 +63,39 @@ export default {
 		return {
 			userData: {
 				id: "",
-				userName: "游客",
+				userName: "未登录，点击登录",
+				password: "",
+				email: "",
+				phone: "",
+				identity: "普通成员",
+				avatar: "",
+				points: 0,
+				commodities: []
+			}
+		}
+	},
+	onLoad() {
+		let jwt = uni.getStorageSync('Jwt')
+		if (jwt === '' || jwt === null || jwt === undefined) return
+		this.userData = uni.getStorageSync("UserData")
+	},
+	methods: {
+		loginOrInfo(){
+			if(this.userData.id === ''){
+				uni.navigateTo({
+					url: '../../Login/Login'
+				})
+				return
+			}
+			
+			uni.navigateTo({
+				url: '../../UserUpdate/UserUpdate'
+			})
+		},
+		logout : function (e){
+			this.userData =  {
+				id: "",
+				userName: "未登录，点击登录",
 				password: "",
 				email: "",
 				phone: "",
@@ -35,86 +104,24 @@ export default {
 				points: 0,
 				commodities: []
 			}
+			uni.setStorageSync('Jwt','')
+			uni.setStorageSync('UserData',this.userData)
+		},
+		aid : function (e){
+			uni.navigateTo({
+				url: '../../Aid/Aid'
+			})
 		}
-	},
-	onLoad() {
-		if(Vue.prototype.$jwt == '')return
-		this.userData = Vue.prototype.$userData
-	},
-	methods: {
-
 	}
 }
 </script>
 
 <style>
-.option {
-	width: 100%;
-	margin-top: 30rpx;
-	margin-bottom: 30rpx;
-	display: block;
-	box-sizing: content-box
+
+.card{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
 }
 
-.option-list {
-	display: block;
-}
-
-.option-button {
-	background-color: #007aff;
-	color: #ffffff;
-	text-align: center;
-	padding: 10px 20px;
-	border-radius: 5px;
-	margin: 10px;
-}
-
-.option-logout {
-	border-color: #c04851;
-	border-style: solid;
-	border-width: thin;
-	color: #c04851;
-	text-align: center;
-	padding: 10px 20px;
-	border-radius: 5px;
-	margin: 10px;
-}
-
-.username {
-	width: 100vw;
-	/* height: 11%; */
-	background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-	position: relative;
-	padding-bottom: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-	margin-bottom: 1px;
-	height: 32vh;
-}
-
-.username-content {
-	display: flex;
-	flex-direction: row;
-	color: #f7f5f3;
-	position: absolute;
-	bottom: 6vh;
-	left: 15px;
-}
-
-.username-text {
-	font-size: 22px;
-	font-weight: bold;
-}
-
-.org {
-	width: 100%;
-	/* height: 11%; */
-	font-weight: bold;
-	color: #333333;
-	padding-bottom: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-	margin-bottom: 1px;
-	border-bottom: 1px solid #ccc;
-}
 </style>

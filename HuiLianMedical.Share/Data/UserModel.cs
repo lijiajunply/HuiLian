@@ -20,7 +20,7 @@ public class UserModel : DataModel
     /// 2:普通用户
     /// 3:急救员
     /// </summary>
-    [Column(TypeName = "varchar(32)")] public string Identity { get; set; } = "";
+    [Column(TypeName = "varchar(32)")] public string Identity { get; set; } = "普通用户";
     [Column(TypeName = "varchar(32)")] public string? Avatar { get; set; } = "";
     public int Points { get; set; }
     public List<CommodityModel> Commodities { get; set; } = [];
