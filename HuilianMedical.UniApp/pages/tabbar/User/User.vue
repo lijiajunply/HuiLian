@@ -14,7 +14,7 @@
 						</el-row>
 					</el-col>
 				</el-row>
-				<el-space size="10" spacer="|">
+				<el-space size="10" spacer="|" style="margin-top: 8px;">
 					<div style="display: flex;">
 						<p>{{userData.points}}</p>
 						<p style="margin-left: 5px;">点数</p>
@@ -29,23 +29,23 @@
 			<view v-if="userData.id == ''" style="width: 100%;margin-top: 60px;">
 				<el-card class="card">
 					<el-row v-if="userData.identity === '急救员' || userData.identity === '管理员' " align="middle" justify="start">
-						<el-col :span="16">
+						<el-col :span="14">
 							<p>您当前已成为急救员</p>
 						</el-col>
-						<el-col :span="8" @click="aid">
-							<el-button type="success">
-								查看急救员信息
-							</el-button>
+						<el-col :span="10">
+							<button class=".button-success" @click="aid">
+								<p>查看急救员信息</p>
+							</button>
 						</el-col>
 					</el-row>
 					<el-row v-else align="middle" justify="start">
-						<el-col :span="16">
+						<el-col :span="14">
 							<p>您当前还未成为急救员</p>
 						</el-col>
-						<el-col :span="8">
-							<el-button type="primary">
-								认证急救员
-							</el-button>
+						<el-col :span="10">
+							<button class="button-primary" @click="aid">
+								<p>认证急救员</p>
+							</button>
 						</el-col>
 					</el-row>
 				</el-card>
@@ -80,7 +80,7 @@ export default {
 		this.userData = uni.getStorageSync("UserData")
 	},
 	methods: {
-		loginOrInfo(){
+		loginOrInfo : function(){
 			if(this.userData.id === ''){
 				uni.navigateTo({
 					url: '../../Login/Login'
@@ -92,7 +92,7 @@ export default {
 				url: '../../UserUpdate/UserUpdate'
 			})
 		},
-		logout : function (e){
+		logout : function (){
 			this.userData =  {
 				id: "",
 				userName: "未登录，点击登录",
@@ -107,7 +107,7 @@ export default {
 			uni.setStorageSync('Jwt','')
 			uni.setStorageSync('UserData',this.userData)
 		},
-		aid : function (e){
+		aid : function (){
 			uni.navigateTo({
 				url: '../../Aid/Aid'
 			})

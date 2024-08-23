@@ -80,26 +80,23 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<MedicalContext>();
     if (!context.Users.Any())
     {
-        var user = Environment.GetEnvironmentVariable("USER", EnvironmentVariableTarget.Process);
         var model = new UserModel()
         {
             Identity = "管理员", UserName = "root", Password = "123456",
-            Phone = "12345678901234", Email = "iosclub-of-xauat@iosclub.com"
+            Phone = "1", Email = "iosclub-of-xauat@iosclub.com"
         };
-        var users = user?.Split(',');
-        if (!string.IsNullOrEmpty(user) && users != null)
-        {
-            if (users.Length > 0)
-                model.UserName = users[0];
-            if (users.Length > 1)
-                model.Password = users[1];
-            if (users.Length > 2)
-                model.Phone = users[2];
-            if (users.Length > 3)
-                model.Email = users[3];
-        }
 
         context.Users.Add(model);
+    }
+
+    if (context.Users.Any())
+    {
+        var a = await context.Users.FirstAsync();
+        a.Identity = "管理员";
+        a.UserName = "root";
+        a.Password = "123456";
+        a.Phone = "1";
+        a.Email = "iosclub-of-xauat@iosclub.com";
     }
 
     context.SaveChanges();

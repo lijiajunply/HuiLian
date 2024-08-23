@@ -8,17 +8,19 @@
 				<label>电话号码</label>
 				<el-form-item>
 					<div class="input-box">
-						<input type="text" placeholder="请输入电话号码" :value="userPhone" required="" />
+						<input type="text" placeholder="请输入电话号码" v-model="userPhone" required="" />
 					</div>
 				</el-form-item>
 				<label>密码</label>
 				<el-form-item>
 					<div class="input-box">
-						<input type="password" placeholder="请输入密码" :value="password" required="" />
+						<input type="password" placeholder="请输入密码" v-model="userPassword" required="" />
 					</div>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" @click="login">登录</el-button>
+					<button class="button-primary" @click="login">
+						<p style="font-size: 16px;">登录</p>
+					</button>
 				</el-form-item>
 			</el-form>
 		</el-row>
@@ -35,9 +37,8 @@ export default {
 		}
 	},
 	methods: {
-		login() {
-
-			if (this.userPhone == '' || this.userPassword == '') // 暂时这样，需要指定账号密码规则。
+		login : function() {
+			if (this.userPhone === '' || this.userPassword === '') // 暂时这样，需要指定账号密码规则。
 			{
 				uni.showToast({
 					title: '用户名或密码不能为空',
@@ -50,12 +51,15 @@ export default {
 				phone: this.userPhone,
 				password: this.userPassword
 			}
+			
+			console.log(userData)
 
 			uni.request({
 				method: "POST",
 				url: apiurl + 'User/Login',
 				data: userData,
 				success: (data) => {
+					console.log(data)
 					if (data.statusCode == 404) {
 						uni.showToast({
 							title: '信息有误',

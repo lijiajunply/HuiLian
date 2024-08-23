@@ -13,5 +13,21 @@ export default {
 </script>
 
 <style>
-/*每个页面公共css */
+.button-primary{
+	background-color: dodgerblue;
+	border-radius: 8px;
+	color: #f3f5f7;
+	p{
+		font-size: small;
+	}
+}
+
+.button-success{
+	background-color: limegreen;
+	border-radius: 8px;
+	color: #f3f5f7;
+	p{
+		font-size: small;
+	}
+}
 </style>

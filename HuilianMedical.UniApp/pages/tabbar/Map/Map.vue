@@ -82,7 +82,7 @@ export default {
 			})
 			this.setData({ markers, markerId });
 		},
-		getRoute() {
+		getRoute : function() {
 			// 起点
 			let { latitude, longitude, markers, markerId, city, textData } = this;
 			let { name, desc } = textData;
@@ -93,13 +93,13 @@ export default {
 			let url = `/pages/routes/routes?longitude=${longitude}&latitude=${latitude}&longitude2=${longitude2}&latitude2=${latitude2}&city=${city}&name=${name}&desc=${desc}`;
 			uni.navigateTo({ url });
 		},
-		clickcontrol(e) {
+		clickcontrol: function(e) {
 			console.log("回到用户当前定位点");
 			let { controlId } = e;
 			let mpCtx = uni.createMapContext("map");
 			mpCtx.moveToLocation();
 		},
-		onSearch() {
+		onSearch : function() {
 		      // 检查输入是否为空
 			  console.log(this.keywords)
 		      if (this.keywords !== '') {
