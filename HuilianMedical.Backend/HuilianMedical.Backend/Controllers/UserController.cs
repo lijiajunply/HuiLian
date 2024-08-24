@@ -91,6 +91,8 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
                 x.Phone == loginModel.Phone && x.Password == loginModel.Password);
 
         if (model == null) return NotFound();
+        
+        Console.WriteLine(model);
 
         return jwtHelper.GetMemberToken(model);
     }

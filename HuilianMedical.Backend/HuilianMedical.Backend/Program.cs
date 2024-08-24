@@ -92,10 +92,20 @@ using (var scope = app.Services.CreateScope())
             Phone = "1", Email = "iosclub-of-xauat@iosclub.com"
         };
 
+        model.Id = model.ToString();
+        
         context.Users.Add(model);
     }
 
-    context.SaveChanges();
+    if (context.Users.Any())
+    {
+        var user = await context.Users.FirstAsync();
+        context.Remove(user);
+        user.Id = user.ToString();
+        await context.AddAsync(user);
+    }
+
+    await context.SaveChangesAsync();
     context.Dispose();
 }
 
