@@ -1,14 +1,18 @@
 <script>
 export default {
-	onLaunch: function () {
+	onLoad() {
 		let user = uni.getStorageSync("UserData")
 		let jwt = uni.getStorageSync('Jwt')
 		
-		if(jwt === undefined)jwt = ''
+		if(jwt === undefined || jwt === null || jwt === '')return
 		
-		Vue.prototype.$userData = user
-		Vue.prototype.$jwt = jwt
-	}
+		this.user = user
+		this.jwt = jwt
+	},
+	globalData: {
+	    user: {},
+	    jwt: ""
+	  },
 };
 </script>
 

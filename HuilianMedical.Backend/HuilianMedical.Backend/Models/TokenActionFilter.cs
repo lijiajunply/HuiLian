@@ -24,9 +24,10 @@ public static class TokenHelper
 {
     public static UserModel? GetUser(this ClaimsPrincipal? claimsPrincipal)
     {
-        var claimId = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.PrimarySid);
+        var claimId = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
         var claimRole = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
-        if (claimId.IsNull() || claimRole.IsNull())
+        var claimName = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+        if (claimId.IsNull() || claimRole.IsNull() || claimName.IsNull())
         {
             return null;
         }
@@ -34,7 +35,8 @@ public static class TokenHelper
         return new UserModel()
         {
             Id = claimId!.Value,
-            Identity = claimRole!.Value
+            Identity = claimRole!.Value,
+            UserName = claimName!.Value
         };
     }
 

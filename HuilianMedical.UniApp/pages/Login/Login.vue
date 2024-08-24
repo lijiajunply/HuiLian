@@ -52,6 +52,8 @@ export default {
 				password: this.userPassword
 			}
 			
+			const app = getApp()
+			
 			console.log(userData)
 
 			uni.request({
@@ -59,7 +61,6 @@ export default {
 				url: apiurl + 'User/Login',
 				data: userData,
 				success: (data) => {
-					console.log(data)
 					if (data.statusCode == 404) {
 						uni.showToast({
 							title: '信息有误',
@@ -67,23 +68,28 @@ export default {
 						});
 						return
 					}
-					Vue.prototype.$jwt = data.data
+					app.globalData.jwt = data.data
+					console.log(app.globalData.jwt)
 
 					uni.request({
 						method: "GET",
 						header: {
-							authorization: "Bearer " + Vue.prototype.$jwt
+							Authorization: "Bearer " + app.globalData.jwt
 						},
 						url: apiurl + 'User/GetData',
-						success: (userData) => {
-							if (userData.statusCode !== 200) {
+						success: (user) => {
+							console.log(user)
+							if (user.statusCode !== 200) {
 								uni.showToast({
 									title: '登录失败',
 									icon: 'none'
 								});
 								return
 							}
-							Vue.prototype.$userData = userData.data
+							
+							console.log(user.data)
+							
+							app.globalData.user = user.data
 							uni.showToast({
 								title: '登录成功',
 								icon: 'none'
@@ -91,7 +97,7 @@ export default {
 							uni.switchTab({
 								url: '../tabbar/User/User',
 							});
-							uni.setStorageSync("UserData", userData.data)
+							uni.setStorageSync("UserData", user.data)
 						}
 					})
 				}
