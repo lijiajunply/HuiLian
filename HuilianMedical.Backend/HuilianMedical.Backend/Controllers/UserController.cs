@@ -48,14 +48,6 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
     [HttpPost]
     public async Task<ActionResult<string>> SignUp(UserModel model)
     {
-        if (DateTime.Today.Month != 10)
-            return NotFound();
-
-        if (context.Users == null!)
-        {
-            return Problem("Entity set 'MemberContext.Students'  is null.");
-        }
-
         model.Id = model.ToString();
         
         context.Users.Add(model);

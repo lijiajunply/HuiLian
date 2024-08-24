@@ -7,7 +7,7 @@
 			<el-form class="login-form">
 				<label>用户名称</label>
 				<el-form-item>
-					<input type="password" placeholder="请输入用户名称" v-model="username" required="" />
+					<input type="text" placeholder="请输入用户名称" v-model="username" required="" />
 				</el-form-item>
 				<label>电话号码</label>
 				<el-form-item>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { apiurl } from '../../api.js'
 export default {
 	data() {
 		return {

@@ -22,6 +22,11 @@
 						<p style="font-size: 16px;">登录</p>
 					</button>
 				</el-form-item>
+				<el-form-item>
+					没有账号？去
+					<a @click="nav">注册</a>
+					一个
+				</el-form-item>
 			</el-form>
 		</el-row>
 	</view>
@@ -101,6 +106,11 @@ export default {
 						}
 					})
 				}
+			})
+		},
+		nav(){
+			uni.navigateTo({
+				url: '../Signup/Signup'
 			})
 		}
 	}
