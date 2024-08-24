@@ -23,11 +23,19 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
     public async Task<ActionResult<UserModel>> GetData()
     {
         var member = httpContextAccessor.HttpContext?.User.GetUser();
-        if (member == null) return NotFound();
+        if (member == null)
+        {
+            Console.WriteLine("未登录");
+            return NotFound();
+        }
 
         member = await context.Users.Include(x => x.Commodities)
             .FirstOrDefaultAsync(x => x.Id == member.Id);
-        if (member == null) return NotFound();
+        if (member == null)
+        {
+            Console.WriteLine("未找到用户");
+            return NotFound();
+        }
         return member;
     }
 
@@ -48,6 +56,8 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
             return Problem("Entity set 'MemberContext.Students'  is null.");
         }
 
+        model.Id = model.ToString();
+        
         context.Users.Add(model);
         try
         {
