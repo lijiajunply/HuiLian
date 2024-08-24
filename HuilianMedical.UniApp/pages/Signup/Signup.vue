@@ -5,21 +5,21 @@
 		</el-row>
 		<el-row align="middle" justify="center" style="margin-top: 50px;">
 			<el-form class="login-form">
+				<label>用户名称</label>
+				<el-form-item>
+					<input type="password" placeholder="请输入用户名称" v-model="username" required="" />
+				</el-form-item>
 				<label>电话号码</label>
 				<el-form-item>
-					<div class="input-box">
-						<input type="text" placeholder="请输入电话号码" v-model="userPhone" required="" />
-					</div>
+					<input type="text" placeholder="请输入电话号码" v-model="phone" required="" />
 				</el-form-item>
 				<label>密码</label>
 				<el-form-item>
-					<div class="input-box">
-						<input type="password" placeholder="请输入密码" v-model="userPassword" required="" />
-					</div>
+					<input type="number" placeholder="请输入密码" v-model="password" required="" />
 				</el-form-item>
 				<el-form-item>
-					<button class="button-primary" @click="login">
-						<p style="font-size: 16px;">登录</p>
+					<button class="button-primary" @click="submitForm">
+						<p style="font-size: 16px;">注册</p>
 					</button>
 				</el-form-item>
 			</el-form>
@@ -28,37 +28,33 @@
 </template>
 
 <script>
-import { apiurl } from '../../api.js'
 export default {
 	data() {
 		return {
-			userPhone: "",
-			userPassword: ""
+			username: '',
+			phone: '',
+			password: ''
 		}
 	},
 	methods: {
-		login : function() {
-			if (this.userPhone === '' || this.userPassword === '') // 暂时这样，需要指定账号密码规则。
-			{
+		submitForm() {
+			if (!this.username || !this.phone || !this.password) {
 				uni.showToast({
-					title: '用户名或密码不能为空',
+					title: '请填写完整信息',
 					icon: 'none'
 				});
 				return;
 			}
 
 			const userData = {
-				phone: this.userPhone,
-				password: this.userPassword
+				userName: this.username,
+				phone: this.phone,
+				password: this.password
 			}
-			
-			const app = getApp()
-			
-			console.log(userData)
 
 			uni.request({
 				method: "POST",
-				url: apiurl + 'User/Login',
+				url: apiurl + 'User/Signup',
 				data: userData,
 				success: (data) => {
 					if (data.statusCode == 404) {
@@ -74,7 +70,7 @@ export default {
 					uni.request({
 						method: "GET",
 						header: {
-							authorization: "Bearer " + app.globalData.jwt
+							Authorization: "Bearer " + app.globalData.jwt
 						},
 						url: apiurl + 'User/GetData',
 						success: (user) => {
@@ -115,7 +111,7 @@ export default {
 	max-width: 100vw
 }
 
-.input-box input {
+input {
 	color: #1c1f23;
 	width: 100%;
 	padding: 10px;
@@ -126,24 +122,5 @@ export default {
 	border-bottom: 1px solid #ededed;
 	outline: none;
 	background: transparent;
-}
-
-.input-box label {
-	color: #1c1f23;
-	padding: 10px;
-	font-size: 16px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	pointer-events: none;
-	transition: .5s;
-}
-
-.input-box input:focus~label,
-.input-box input:valid~label {
-	top: -18px;
-	left: 0;
-	color: #3c3c43;
-	font-size: 12px;
 }
 </style>

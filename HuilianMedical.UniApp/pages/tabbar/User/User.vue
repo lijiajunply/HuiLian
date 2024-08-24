@@ -75,9 +75,9 @@ export default {
 		}
 	},
 	onLoad() {
-		let jwt = uni.getStorageSync('Jwt')
-		if (jwt === '' || jwt === null || jwt === undefined) return
-		this.userData = uni.getStorageSync("UserData")
+		const app = getApp()
+		this.userData = app.globalData.user
+		console.log(this.userData)
 	},
 	methods: {
 		loginOrInfo : function(){

@@ -78,7 +78,7 @@ public class UserController(MedicalContext context, JwtHelper jwtHelper, IHttpCo
 
         var model =
             await context.Users.FirstOrDefaultAsync(x =>
-                (x.Phone == loginModel.Phone || x.Email == loginModel.Email) && x.Password == loginModel.Password);
+                x.Phone == loginModel.Phone && x.Password == loginModel.Password);
 
         if (model == null) return NotFound();
 

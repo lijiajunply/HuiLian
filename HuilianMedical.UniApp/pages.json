@@ -52,6 +52,13 @@
 			{
 				"navigationBarTitleText" : "路线"
 			}
+		},
+		{
+			"path" : "pages/Signup/Signup",
+			"style" : 
+			{
+				"navigationBarTitleText" : "注册"
+			}
 		}
 	],
 	"globalStyle": {
