@@ -89,16 +89,6 @@ using (var scope = app.Services.CreateScope())
         context.Users.Add(model);
     }
 
-    if (context.Users.Any())
-    {
-        var a = await context.Users.FirstAsync();
-        a.Identity = "管理员";
-        a.UserName = "root";
-        a.Password = "123456";
-        a.Phone = "1";
-        a.Email = "iosclub-of-xauat@iosclub.com";
-    }
-
     context.SaveChanges();
     context.Dispose();
 }
@@ -107,6 +97,8 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

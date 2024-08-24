@@ -43,7 +43,14 @@
 			"path" : "pages/tabbar/Search/Search",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "智能问答"
+			}
+		},
+		{
+			"path" : "pages/tabbar/route/route",
+			"style" : 
+			{
+				"navigationBarTitleText" : "路线"
 			}
 		}
 	],

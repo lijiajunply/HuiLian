@@ -5,7 +5,7 @@
 	<view class="map_container" v-loading="loading">
 		<map class="map" :longitude="longitude" :latitude="latitude" scale='11' 
 			 show-location="true" :markers="markers"
-			 :markertap="makertap" />
+			 :markertap="markertap" />
 	</view>
 	<view class="map_text" v:if="{{textData.name}}" v-loading="loading">
 		<view class="map-1" @click="getRoute">
@@ -57,8 +57,8 @@ export default {
 			})
 	},
 	methods: {
-		makertap(e) {
-			//console.log(e);
+		markertap: function(e) {
+			console.log(e);
 			let marker = this.markers[e.detail];
 			// console.log(marker);
 			this.showMarkerInfo(marker);
@@ -80,18 +80,20 @@ export default {
 				item.iconPath = "/images/marker.png";
 				if (index == markerId) item.iconPath = "/images/marker_checked.png";
 			})
-			this.setData({ markers, markerId });
+			this.markers = markers
+			this.markerId = markerId
 		},
 		getRoute : function() {
 			// 起点
-			let { latitude, longitude, markers, markerId, city, textData } = this;
-			let { name, desc } = textData;
-			if (!markers.length) return;
+			let { latitude, longitude, markers, markerId, city } = this;
+			let { name, desc } = this.textData;
+			if (markers.length === 0) return;
 			// 终点
-			console.log(markers,markerId)
 			let { latitude: latitude2, longitude: longitude2 } = markers[markerId];
-			let url = `/pages/routes/routes?longitude=${longitude}&latitude=${latitude}&longitude2=${longitude2}&latitude2=${latitude2}&city=${city}&name=${name}&desc=${desc}`;
-			uni.navigateTo({ url });
+			
+			uni.navigateTo({
+				url : '/pages/tabbar/route/route' + `?longitude=${longitude}&latitude=${latitude}&longitude2=${longitude2}&latitude2=${latitude2}&city=${city}&name=${name}&desc=${desc}` 
+			});
 		},
 		clickcontrol: function(e) {
 			console.log("回到用户当前定位点");

@@ -12,7 +12,7 @@
 			</el-space>
 		</el-tab-pane>
 	</el-tabs>
-	<view v-if="category == []" style="text-align: center;margin-top: 30vh;">
+	<view v-if="category.length === 0" style="text-align: center;margin-top: 30vh;">
 		<img src="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg" style="width: 80%;"/>
 		<p>当前没有商品</p>
 	</view>
