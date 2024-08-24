@@ -59,6 +59,13 @@
 			{
 				"navigationBarTitleText" : "注册"
 			}
+		},
+		{
+			"path" : "pages/Help/Help",
+			"style" : 
+			{
+				"navigationBarTitleText" : "帮助中心"
+			}
 		}
 	],
 	"globalStyle": {
