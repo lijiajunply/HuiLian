@@ -1,15 +1,7 @@
 <script>
 export default {
-	onLoad() {
-		let user = uni.getStorageSync("UserData")
-		let jwt = uni.getStorageSync('Jwt')
-
-		console.log(user,jwt)
-
-		if (jwt === undefined || jwt === null || jwt === '') return
-
-		this.user = user
-		this.jwt = jwt
+	onMounted() {
+		
 	},
 	globalData: {
 		user: {

@@ -1,16 +1,25 @@
 <template>
-	<view style="height: 100vw;">
-		<view class="container">
-			{{ typingText }}
+	<view class="app">
+		<view class="header">
+			<h1>发现</h1>
+			<h2>从一个问题开始</h2>
 		</view>
-		<el-row class="info">
-			<el-col :span="18">
-				<el-input v-model="text" placeholder="请输入内容"></el-input>
-			</el-col>
-			<el-col :span="6">
-				<button @click="fetchText">发送</button>
-			</el-col>
-		</el-row>
+		<view class="description">
+			<p>你可以选择以下问题或直接输入</p>
+		</view>
+		<view class="questions">
+			<button class="question">陈云与邓小平的主张有什么异同</button>
+			<button class="question">中世纪欧洲有哪些有实力的王国</button>
+			<button class="question">波罗的海三国与北欧有什么历史 ...</button>
+			<button class="question">总体国家安全观的五个统筹是 ...</button>
+		</view>
+		<view class="actions">
+			<button class="action">搜索一下</button>
+			<button class="action">换一换</button>
+		</view>
+		<view class="footer">
+			<p>输入你想问的 ...</p>
+		</view>
 	</view>
 </template>
 
@@ -61,21 +70,48 @@ export default {
 
 
 <style>
-.container {
-	position: absolute;
-	top: 0;
-	bottom: 80px;
-	left: 0;
-	right: 0;
+.app {
+	text-align: center;
+	background: linear-gradient(to bottom, #4a90e2, #9013fe);
+	color: white;
+	padding: 20px;
 }
 
-.info {
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0px;
-	height: 80px;
-	background: #fff;
-	padding: 0 15px;
+.header h1 {
+	font-size: 2em;
+}
+
+.header h2 {
+	font-size: 1.2em;
+}
+
+.description p {
+	margin: 20px 0;
+}
+
+.questions .question {
+	display: block;
+	margin: 10px auto;
+	padding: 10px 20px;
+	background: white;
+	color: #4a90e2;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.actions .action {
+	display: inline-block;
+	margin: 10px;
+	padding: 10px 20px;
+	background: white;
+	color: #4a90e2;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.footer p {
+	margin-top: 20px;
 }
 </style>

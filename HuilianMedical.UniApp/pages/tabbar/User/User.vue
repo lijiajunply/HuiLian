@@ -10,7 +10,6 @@
 					<el-col :span="15" style="height: 20vw;">
 						<el-row align="middle" justify="start" style="height: 100%;margin-left: 10px;">
 							<h3>{{ userData.userName }}</h3>
-							<p>{{userData.identity}}</p>
 						</el-row>
 					</el-col>
 				</el-row>
@@ -74,7 +73,7 @@ export default {
 			}
 		}
 	},
-	onLoad() {
+	onShow() {
 		const app = getApp()
 		this.userData = app.globalData.user
 		console.log(this.userData)

@@ -1,7 +1,4 @@
 <template>
-	<view class="section">
-		<input @confirm="onSearch" inputmode="search" placeholder="请搜索相关内容" v-model="keywords" confirm-type='search'/>
-	</view>
 	<view class="map_container" v-loading="loading">
 		<map class="map" :longitude="longitude" :latitude="latitude" scale='11' 
 			 show-location="true" :markers="markers"
@@ -23,7 +20,6 @@ import Amap from "../../../utils/amap.js";
 export default {
 	data() {
 		return {
-			keywords: '',
 			markers: [],
 			textData: {},
 			latitude: 0,
@@ -33,7 +29,15 @@ export default {
 			loading : true,
 		};
 	},
-	async onLoad() {
+	async onShow() {
+		const app = getApp()
+		let user = uni.getStorageSync("UserData")
+		let jwt = uni.getStorageSync('Jwt')
+		
+		console.log(user,jwt)
+		
+		app.globalData.user = user
+		app.globalData.jwt = jwt
 		Amap.getRegeo()
 			.then(d => {
 				this.textData = {
@@ -100,41 +104,16 @@ export default {
 			let { controlId } = e;
 			let mpCtx = uni.createMapContext("map");
 			mpCtx.moveToLocation();
-		},
-		onSearch : function() {
-		      // 检查输入是否为空
-			  console.log(this.keywords)
-		      if (this.keywords !== '') {
-		        // 跳转到其他页面，传递搜索查询参数
-		        uni.navigateTo({
-		          url: '/pages/tabbar/Search/Search' + `?text=${this.keywords}`,
-		        });
-		        // 清空输入框
-		        this.keywords = '';
-		      }
-		    },
+		}
 	}
 };
 </script>
 
 <style>
-.section {
-	height: 30px;
-	width: 100%;
-}
-
-.section input {
-	width: 90%;
-	margin: 5px auto;
-	border: 1px solid #c3c3c3;
-	height: 30px;
-	border-radius: 3px;
-	padding: 0 5px;
-}
 
 .map_container {
 	position: absolute;
-	top: 42px;
+	top: 0;
 	bottom: 80px;
 	left: 0;
 	right: 0;

@@ -74,7 +74,7 @@ export default {
 						return
 					}
 					app.globalData.jwt = data.data
-					console.log(app.globalData.jwt)
+					uni.setStorageSync("Jwt", data.data)
 
 					uni.request({
 						method: "GET",
@@ -83,7 +83,6 @@ export default {
 						},
 						url: apiurl + 'User/GetData',
 						success: (user) => {
-							console.log(user)
 							if (user.statusCode !== 200) {
 								uni.showToast({
 									title: '登录失败',
@@ -91,8 +90,6 @@ export default {
 								});
 								return
 							}
-							
-							console.log(user.data)
 							
 							app.globalData.user = user.data
 							uni.showToast({
