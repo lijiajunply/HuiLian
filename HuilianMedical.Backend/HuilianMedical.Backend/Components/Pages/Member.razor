@@ -1,0 +1,27 @@
+﻿@page "/Member"
+@using HuiLianMedical.Share
+@using HuiLianMedical.Share.Data
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<MedicalContext> dbContextFactory
+
+<Table TItem="UserModel" DataSource="@users" Responsive>
+    <PropertyColumn Title="姓名" Property="c => c.UserName"/>
+    <PropertyColumn Title="编号" Property="c => c.Id"/>
+    <PropertyColumn Title="头像路径" Property="c => c.Avatar"/>
+    <PropertyColumn Title="邮箱" Property="c => c.Email"/>
+    <PropertyColumn Title="手机号码" Property="c => c.Phone"/>
+    <PropertyColumn Title="身份" Property="c => c.Identity"/>
+    <PropertyColumn Title="点数" Property="c => c.Points"/>
+</Table>
+
+@code{
+
+    private UserModel[] users = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        await using var context = await dbContextFactory.CreateDbContextAsync();
+        users = await context.Users.ToArrayAsync();
+    }
+
+}

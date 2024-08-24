@@ -93,16 +93,24 @@ using (var scope = app.Services.CreateScope())
         };
 
         model.Id = model.ToString();
-        
+
         context.Users.Add(model);
     }
 
     if (context.Users.Any())
     {
-        var user = await context.Users.FirstAsync();
-        context.Remove(user);
-        user.Id = user.ToString();
-        await context.AddAsync(user);
+        var users = await context.Users.ToListAsync();
+        context.Users.RemoveRange(users);
+        await context.SaveChangesAsync();
+        var model = new UserModel()
+        {
+            Identity = "管理员", UserName = "root", Password = "123456",
+            Phone = "1", Email = "iosclub-of-xauat@iosclub.com"
+        };
+
+        model.Id = model.ToString();
+
+        context.Users.Add(model);
     }
 
     await context.SaveChangesAsync();
