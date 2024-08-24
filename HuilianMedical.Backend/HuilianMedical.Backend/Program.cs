@@ -6,6 +6,8 @@ using HuilianMedical.Backend.Models;
 using HuiLianMedical.Share;
 using HuiLianMedical.Share.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.WebEncoders;
 using Microsoft.IdentityModel.Tokens;
@@ -18,7 +20,11 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddAntDesign();
 
+builder.Services.AddScoped<ProtectedSessionStorage>();
+builder.Services.AddScoped<AuthenticationStateProvider, Provider>();
+builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddAuthentication(options => { options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; })
     .AddJwtBearer(options =>

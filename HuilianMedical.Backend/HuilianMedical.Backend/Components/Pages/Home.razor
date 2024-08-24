@@ -1,7 +1,30 @@
 ﻿@page "/"
+@using HuiLianMedical.Share
+@using HuiLianMedical.Share.Data
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<MedicalContext> dbContextFactory
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+@foreach (var user in users)
+{
+    <div>
+        @($"{user.UserName} {user.Email} {user.Password} {user.Identity} {user.Phone} {user.Id}")
+    </div>
+}
+
+@code{
+
+    private UserModel[] users = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        await using var context = await dbContextFactory.CreateDbContextAsync();
+        users = await context.Users.ToArrayAsync();
+    }
+
+}
