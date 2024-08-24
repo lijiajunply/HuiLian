@@ -29,6 +29,9 @@ public static class TokenHelper
         var claimName = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
         if (claimId.IsNull() || claimRole.IsNull() || claimName.IsNull())
         {
+            Console.WriteLine(claimId?.Value);
+            Console.WriteLine(claimRole?.Value);
+            Console.WriteLine(claimName?.Value);
             return null;
         }
 
