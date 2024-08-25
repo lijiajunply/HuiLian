@@ -163,3 +163,6 @@ node_modules/
 /UserAva/
 /Aid/
 /Commodity/
+
+/HuilianMedical.UniApp/unpackage/cache/
+/HuilianMedical.UniApp/unpackage/release

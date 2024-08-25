@@ -25,17 +25,10 @@
 				</el-space>
 			</el-card>
 			
-			<view v-if="userData.id == ''" style="width: 100%;margin-top: 60px;">
+			<view v-if="userData.id !== ''" style="width: 100%;margin-top: 60px;">
 				<el-card class="card">
-					<el-row v-if="userData.identity === '急救员' || userData.identity === '管理员' " align="middle" justify="start">
-						<el-col :span="14">
-							<p>您当前已成为急救员</p>
-						</el-col>
-						<el-col :span="10">
-							<button class=".button-success" @click="aid">
-								<p>查看急救员信息</p>
-							</button>
-						</el-col>
+					<el-row v-if="userData.identity === '急救员' " align="middle" justify="start">
+						您当前已成为急救员
 					</el-row>
 					<el-row v-else align="middle" justify="start">
 						<el-col :span="14">
@@ -51,7 +44,9 @@
 			</view>
 		</el-main>
 		<el-footer>
-			<el-button v-if="userData.id !== ''" type="danger" style="width: 100%;height: 30px;" plain>退出登录</el-button>
+			<button @click="logout" v-if="userData.id !== ''" class="button-danger" style="width: 100%;height: 30px;">
+				<p>退出登录</p>
+			</button>
 		</el-footer>
 	</el-container>
 </template>
@@ -103,8 +98,15 @@ export default {
 				points: 0,
 				commodities: []
 			}
+			const app = getApp()
 			uni.setStorageSync('Jwt','')
 			uni.setStorageSync('UserData',this.userData)
+			app.globalData.userData = this.userData
+			app.globalData.jwt = ''
+			uni.showToast({
+				title: '注销成功',
+				icon: 'none'
+			});
 		},
 		aid : function (){
 			uni.navigateTo({

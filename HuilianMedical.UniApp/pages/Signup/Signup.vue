@@ -53,6 +53,7 @@ export default {
 				password: this.password
 			}
 
+			const app = getApp()
 			uni.request({
 				method: "POST",
 				url: apiurl + 'User/Signup',
@@ -78,7 +79,7 @@ export default {
 							console.log(user)
 							if (user.statusCode !== 200) {
 								uni.showToast({
-									title: '登录失败',
+									title: '注册失败',
 									icon: 'none'
 								});
 								return
@@ -88,7 +89,7 @@ export default {
 							
 							app.globalData.user = user.data
 							uni.showToast({
-								title: '登录成功',
+								title: '注册成功',
 								icon: 'none'
 							});
 							uni.switchTab({

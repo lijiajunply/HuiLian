@@ -40,4 +40,14 @@ export default {
 		font-size: small;
 	}
 }
+
+.button-danger {
+	background-color: #ff4d4f;
+	border-radius: 8px;
+	color: #f3f5f7;
+
+	p {
+		font-size: small;
+	}
+}
 </style>

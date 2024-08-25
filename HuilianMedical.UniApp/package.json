@@ -1,82 +1,18 @@
 {
-  "id": "uni-tabbar",
-  "name": "底部选项卡模板",
-  "displayName": "底部选项卡模板",
-  "version": "0.0.9",
-  "description": "中间带+号的底部选项卡",
-  "keywords": [
-    "tabbar",
-    "uni-tabbar",
-    "选项卡"
-  ],
-  "dcloudext": {
-    "category": [
-      "前端页面模板",
-      "uni-app前端项目模板"
+    "id": "ua-markdown",
+    "name": "uniapp markdown语法渲染及代码高亮",
+    "displayName": "uniapp markdown语法渲染及代码高亮",
+    "version": "1.2.4",
+    "description": "基于uniapp+vue3自定义解析markdown语法/高亮，适用于h5+小程序+App端。",
+    "keywords": [
+        "ua-markdown",
+        "uni-markdown",
+        "markdown"
     ],
-    "sale": {
-      "regular": {
-        "price": "0.00"
-      },
-      "sourcecode": {
-        "price": "0.00"
-      }
-    },
-    "contact": {
-      "qq": ""
-    },
-    "declaration": {
-      "ads": "无",
-      "data": "无",
-      "permissions": "无"
-    },
-    "npmurl": ""
-  },
-  "repository": "",
-  "uni_modules": {
-    "platforms": {
-      "cloud": {
-        "tcb": "y",
-        "aliyun": "y"
-      },
-      "client": {
-        "App": {
-          "app-vue": "u",
-          "app-nvue": "u"
-        },
-        "H5-mobile": {
-          "Safari": "u",
-          "Android Browser": "u",
-          "微信浏览器(Android)": "u",
-          "QQ浏览器(Android)": "u"
-        },
-        "H5-pc": {
-          "Chrome": "u",
-          "IE": "u",
-          "Edge": "u",
-          "Firefox": "u",
-          "Safari": "u"
-        },
-        "小程序": {
-          "微信": "u",
-          "阿里": "u",
-          "百度": "u",
-          "字节跳动": "u",
-          "QQ": "u",
-          "京东": "u"
-        },
-        "快应用": {
-          "华为": "u",
-          "联盟": "u"
-        },
-        "Vue": {
-          "vue2": "u",
-          "vue3": "u"
-        }
-      }
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
     }
-  },
-  "dependencies": {
-    "element-plus": "^2.8.0"
-  }
 }

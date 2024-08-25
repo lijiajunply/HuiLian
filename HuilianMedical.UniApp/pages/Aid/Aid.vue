@@ -15,7 +15,7 @@
 				<image v-if="imageSrc" :src="imageSrc" mode="aspectFit"></image>
 			</view>
 		</view>
-		<button bindtap="handleSubmit">注册</button>
+		<button @click="handleSubmit">注册</button>
 	</view>
 </template>
 
@@ -36,15 +36,26 @@ export default {
 				sourceType: ['album', 'camera'],
 				success: (res) => {
 					const tempFilePaths = res.tempFilePaths[0];
-					this.setData({
-						imageSrc: tempFilePaths
-					});
+					this.imageSrc= tempFilePaths
 				}
 			});
 		},
 
 		handleSubmit: function (e) {
-
+			if(this.idCard === '' || this.emergencyCode === '' || this.imageSrc === ''){
+				uni.showToast({
+					title: '请填写完相关信息',
+					icon: 'none'
+				});
+				return
+			}
+			uni.showToast({
+				title: '注册成功，现在正在进行人工审核',
+				icon: 'none'
+			});
+			uni.switchTab({
+				url: '../tabbar/User/User',
+			});
 		}
 	}
 }	
@@ -61,7 +72,6 @@ export default {
 }
 
 input {
-	width: 100%;
 	height: 80rpx;
 	padding: 0 20rpx;
 	border: 1px solid #ccc;
