@@ -1,5 +1,5 @@
 {
-    "name" : "HuilianMedical.UniApp",
+    "name" : "惠联医疗",
     "appid" : "__UNI__00805EB",
     "description" : "",
     "versionName" : "1.0.0",
@@ -32,8 +32,12 @@
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
-            "ios" : {},
-            "sdkConfigs" : {}
+            "ios" : {
+                "dSYMs" : false
+            },
+            "sdkConfigs" : {
+                "ad" : {}
+            }
         }
     },
     "quickapp" : {},
